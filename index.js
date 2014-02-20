@@ -3,7 +3,7 @@ var login = require('./login');
 
 var app = connect();
 
-app.use(connect.json()); // Parse JSON request body into `request.body`
+app.use(connect.json()); // Parse JSON request body into`request.body`
 app.use(connect.urlencoded()); // Parse form in request body into `request.body`
 app.use(connect.cookieParser()); // Parse cookies in the request headers into `request.cookies`
 app.use(connect.query()); // Parse query string into `request.query`
@@ -37,8 +37,11 @@ function get(request, response) {
 
 function post(request, response) {
 	// TODO: read 'name and email from the request.body'
-	// var newSessionId = login.login('xxx', 'xxx@gmail.com');
+         var readpg = request.body;
+         var email = readpg['email'];
+	 var newSessionId = login.login('lab2', '@gmail.com');
 	// TODO: set new session id to the 'session_id' cookie in the response
+         response.setHeader('Set-Cookie','seession_id=s'+newSessionId);
 	// replace "Logged In" response with response.end(login.hello(newSessionId));
 
 	response.end("Logged In\n");
@@ -59,6 +62,6 @@ function put(request, response) {
 	response.end("Re-freshed session id\n");
 };
 
-app.listen(8000);
+app.listen(2000);
 
-console.log("Node.JS server running at 8000...");
+console.log("Node.JS server running at 2000...");
